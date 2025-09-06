@@ -5,6 +5,31 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+# Custom Styling
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: #121212;
+        color: #ffffff;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    h1, h2, h3 {
+        color: #E50914; /* Netflix Red */
+    }
+    .stButton>button {
+        background-color: #E50914;
+        color: white;
+        border-radius: 8px;
+        padding: 0.6em 1.2em;
+        font-weight: bold;
+    }
+    .stButton>button:hover {
+        background-color: #f6121d;
+        color: #fff;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # ---------------------------
 # Google Drive file ID for similarity.pkl
 # ---------------------------
@@ -64,29 +89,34 @@ else:
     st.error("Unknown format for similarity.pkl!")
     st.stop()
 
+# App Title
+
 st.title("🎬 Movie Recommender System")
 st.markdown("""
 ### Welcome to my Movie Recommender System  
 Created as part of a Data Analytics & AI/ML project to enhance user experience through personalized recommendations.
 """)
 
-selected_movie_name = st.selectbox('Select a movie:', movies['title'].values)
+# Movie Search / Selection
+selected_movie_name = st.selectbox('🎥 Choose a movie you like:', movies['title'].values)
 
+# Recommend Button & Results
 if st.button('Recommend'):
     recommendations = recommend(selected_movie_name)
     if not recommendations:
-        st.warning("No recommendations found for this movie.")
+        st.warning("⚠️ No recommendations found for this movie.")
     else:
-        st.markdown("#### Recommended Movies:")
-        for i in recommendations:
-            st.write(i)
+        st.subheader(" Top 5 Recommendations")
+        cols = st.columns(len(recommendations))
+        for i, col in enumerate(cols):
+            with col:
+                col.markdown(f"**{recommendations[i]}**")
 
-# ---------------------------
 # Footer
-# ---------------------------
 st.markdown("""
 ---
-**Developed by V.Shreyan**  
-📧 shreyansharma76@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/vshreyansharma) | [GitHub](https://github.com/shreyan-77)
+Developed by **V. Shreyan**  
+🔗 [LinkedIn](https://www.linkedin.com/in/vshreyansharma) | [GitHub](https://github.com/shreyan-77) | shreyansharma76@gmail.com
 """)
+
+
