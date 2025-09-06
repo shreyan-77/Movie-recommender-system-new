@@ -41,9 +41,6 @@ movies = pd.DataFrame(movie_dict)
 # ---------------------------
 similarity = load_similarity()
 
-# ---------------------------
-# Prepare for recommendations
-# ---------------------------
 # Case 1: similarity is a dict of movie -> list of recommended movies
 if isinstance(similarity, dict):
     def recommend(movie):
@@ -67,9 +64,6 @@ else:
     st.error("Unknown format for similarity.pkl!")
     st.stop()
 
-# ---------------------------
-# Streamlit UI
-# ---------------------------
 st.title("🎬 Movie Recommender System")
 st.markdown("""
 ### Welcome to my Movie Recommender System  
@@ -94,5 +88,5 @@ st.markdown("""
 ---
 **Developed by V.Shreyan**  
 📧 shreyansharma76@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/vshreyan) | [GitHub](https://github.com/shreyan-77)
+🔗 [LinkedIn](https://www.linkedin.com/in/vshreyansharma) | [GitHub](https://github.com/shreyan-77)
 """)
